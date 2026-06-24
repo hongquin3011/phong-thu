@@ -27,6 +27,7 @@ body{
     top:-100px;
     pointer-events:none;
     z-index:9999;
+    filter:drop-shadow(0 0 3px rgba(255,182,193,.5));
 }
 
 @keyframes fall{
@@ -273,28 +274,26 @@ See yaaaaaa 💕
 
 function createPetal(){
 
-const petal=document.createElement("img");
+    const petal=document.createElement("div");
 
-petal.src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Cherry_blossom_petal.svg/512px-Cherry_blossom_petal.svg.png";
+    petal.className="petal";
 
-petal.className="petal";
+    petal.innerHTML="🌸";
 
-const size=Math.random()*25+15;
+    petal.style.left=Math.random()*100+"vw";
 
-petal.style.width=size+"px";
+    petal.style.fontSize=(Math.random()*15+18)+"px";
 
-petal.style.left=Math.random()*100+"vw";
+    const duration=Math.random()*6+8;
 
-const duration=Math.random()*6+8;
+    petal.style.animation=
+    `fall ${duration}s linear forwards`;
 
-petal.style.animation=
-`fall ${duration}s linear forwards`;
+    document.body.appendChild(petal);
 
-document.body.appendChild(petal);
-
-setTimeout(()=>{
-petal.remove();
-},duration*1000);
+    setTimeout(()=>{
+        petal.remove();
+    },duration*1000);
 
 }
 
