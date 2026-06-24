@@ -95,36 +95,43 @@ body{
     position:relative;
 }
 
-/* phần thân */
-.body-envelope{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:130px;
+
+.envelope-shape{
+    width:320px;
+    height:180px;
     background:#FFF0A8;
     border-radius:12px;
-    z-index:2;
+    position:absolute;
+    overflow:hidden;
 }
 
-/* phần nắp */
-.flap{
+
+/* tạo đường gấp phong thư */
+.envelope-shape::before{
+    content:"";
     position:absolute;
     top:0;
-    width:100%;
-    height:120px;
-    background:#FFF6C7;
-    clip-path:polygon(0 0,100% 0,50% 100%);
-    z-index:3;
+    left:0;
+
+    width:0;
+    height:0;
+
+    border-left:160px solid transparent;
+    border-right:160px solid transparent;
+    border-top:90px solid #FFF6C7;
 }
+
 
 /* tim */
 .heart{
     position:absolute;
-    top:85px;
+    top:65px;
     left:50%;
+
     transform:translateX(-50%);
+
     font-size:45px;
-    z-index:4;
+    z-index:3;
 }
     
 #letter{
@@ -216,12 +223,8 @@ body{
 
 <div class="envelope" id="envelope">
 
-<div class="flap"></div>
-
-<div class="body-envelope"></div>
-
-<div class="heart">💌</div>
-
+<div class="envelope-shape">
+    <div class="heart">💌</div>
 </div>
 
 </div>
