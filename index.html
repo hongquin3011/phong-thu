@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lá thư bí mật</title>
+
+<style>
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#f5e6d3;
+    font-family:Arial;
+}
+
+#envelope{
+    width:250px;
+    height:160px;
+    background:#d88c8c;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+    font-size:50px;
+}
+
+#letter{
+    display:none;
+    position:absolute;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    width:400px;
+    box-shadow:0 0 20px rgba(0,0,0,.2);
+}
+</style>
+</head>
+
+<body>
+
+<div id="envelope">✉️</div>
+
+<div id="letter">
+<h2>Gửi bạn ❤️</h2>
+
+<p>
+Đây là nội dung lá thư của bạn.
+</p>
+
+<p>
+Chúc bạn luôn vui vẻ!
+</p>
+</div>
+
+<script>
+document.getElementById("envelope").onclick=function(){
+    document.getElementById("envelope").style.display="none";
+    document.getElementById("letter").style.display="block";
+}
+</script>
+
+</body>
+</html>
