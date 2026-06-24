@@ -1,162 +1,334 @@
 <!DOCTYPE html>
-
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thư mời bí mật</title>
+<title>Thư Mời 💌</title>
 
 <style>
-body{
+
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#fdeff4;
     overflow:hidden;
-    font-family: "Segoe UI", sans-serif;
-    background:linear-gradient(to bottom,#ffe6ee,#fff5f8);
+    font-family:"Segoe UI",sans-serif;
+    height:100vh;
+}
+
+/* CÁNH HOA */
+
+.petal{
+    position:fixed;
+    top:-100px;
+    pointer-events:none;
+    z-index:9999;
+}
+
+@keyframes fall{
+
+    0%{
+        transform:
+        translateX(0px)
+        translateY(-100px)
+        rotate(0deg);
+    }
+
+    25%{
+        transform:
+        translateX(40px)
+        translateY(25vh)
+        rotate(90deg);
+    }
+
+    50%{
+        transform:
+        translateX(-30px)
+        translateY(50vh)
+        rotate(180deg);
+    }
+
+    75%{
+        transform:
+        translateX(60px)
+        translateY(75vh)
+        rotate(270deg);
+    }
+
+    100%{
+        transform:
+        translateX(-20px)
+        translateY(120vh)
+        rotate(360deg);
+    }
+
+}
+
+/* MÀN HÌNH PHONG THƯ */
+
+#scene{
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-#envelope{
-    width:260px;
-    height:180px;
-    background:#ff9eb5;
-    border-radius:12px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
-    font-size:70px;
-    box-shadow:0 8px 20px rgba(0,0,0,.15);
-    transition:0.3s;
+.envelope-wrap{
+    text-align:center;
 }
 
-#envelope:hover{
-    transform:scale(1.05);
+.open-text{
+    color:#ff5f93;
+    font-size:24px;
+    margin-bottom:25px;
+    font-weight:bold;
 }
+
+.envelope{
+    width:320px;
+    height:220px;
+    position:relative;
+    cursor:pointer;
+}
+
+.body-envelope{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:170px;
+    background:#f8a6bc;
+    border-radius:10px;
+    z-index:2;
+}
+
+.flap{
+    position:absolute;
+    top:0;
+    width:100%;
+    height:120px;
+    background:#ffbdd0;
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    transform-origin:top;
+    transition:1s;
+    z-index:3;
+}
+
+.heart{
+    position:absolute;
+    top:80px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:50px;
+    z-index:4;
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+/* THƯ */
 
 #letter{
+    position:fixed;
+    inset:0;
     display:none;
+    overflow:auto;
+    padding:30px;
+}
+
+.paper{
+    max-width:800px;
+    margin:50px auto;
     background:white;
-    width:85%;
-    max-width:700px;
-    font-size:22px;
-    max-width:90%;
-    padding:35px;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-    line-height:1.8;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
     position:relative;
     z-index:5;
 }
 
-h2{
+.paper h1{
     text-align:center;
-    color:#ff5b8a;
+    color:#ff5f93;
+    margin-bottom:35px;
+}
+
+.line{
+    opacity:0;
+    transform:translateY(15px);
+    margin-bottom:25px;
+    font-size:28px;
+    line-height:1.8;
+}
+
+.show{
+    animation:typing .8s forwards;
+}
+
+@keyframes typing{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .capoo{
     text-align:center;
-    margin-top:20px;
+    margin-top:30px;
 }
 
 .capoo img{
-    width:180px;
+    width:220px;
 }
 
-.sakura{
-    position:fixed;
-    top:-20px;
-    font-size:22px;
-    animation:fall linear forwards;
-    pointer-events:none;
+@media(max-width:768px){
+
+.paper{
+    padding:30px;
+    margin:20px auto;
 }
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-    }
+.line{
+    font-size:18px;
 }
+
+.paper h1{
+    font-size:32px;
+}
+
+.capoo img{
+    width:160px;
+}
+
+}
+
 </style>
-
 </head>
 
 <body>
 
-<div id="envelope">💌</div>
+<div id="scene">
+
+<div class="envelope-wrap">
+
+<div class="open-text">
+💗 Nhấn vào thư để mở 💗
+</div>
+
+<div class="envelope" id="envelope">
+
+<div class="flap"></div>
+
+<div class="body-envelope"></div>
+
+<div class="heart">💌</div>
+
+</div>
+
+</div>
+
+</div>
 
 <div id="letter">
-    <h2>💗 Thư Mời 💗</h2>
 
-<p>
-Dear anh Thắng cụa iem :3
-</p>
+<div class="paper">
 
-<p>
-Nay là ngày ny em tròn 29 tủi, em muốn tổ chức cho ảnh một buổi sinh nhật,
-có một chiếc bánh kem cùng một món quà nhỏ xinh.
-</p>
+<h1>💗 Thư Mời 💗</h1>
 
-<p>
+<div class="line">Dear anh Thắng cụa iem :3</div>
+
+<div class="line">
+Nay là ngày ny em tròn 29 tủi, em muốn tổ chức cho ảnh một buổi sinh nhật, có một chiếc bánh kem cùng một món quà nhỏ xinh.
+</div>
+
+<div class="line">
 Hi vọng anh cùng người thương có thể sắp xếp thời gian đến chung vui với tụi iem.
-</p>
+</div>
 
-<p>
+<div class="line">
 Thời gian và địa điểm để em bàn lại với ảnh rùi báo anh nhen :>
-</p>
+</div>
 
-<p>
+<div class="line">
 See yaaaaaa 💕
-</p>
+</div>
 
 <div class="capoo">
-    <img src="https://media.tenor.com/0fKX6M8i5s8AAAAi/capoo-love.gif">
+
+<img src="https://media.tenor.com/0fKX6M8i5s8AAAAi/capoo-love.gif">
+
+</div>
+
 </div>
 
 </div>
 
 <script>
 
-document.getElementById("envelope").onclick=function(){
-    document.getElementById("envelope").style.display="none";
-    document.getElementById("letter").style.display="block";
-}
+/* HOA ANH ĐÀO */
 
 function createPetal(){
 
-    const petal=document.createElement("img");
+const petal=document.createElement("img");
 
-    petal.src="https://pngimg.com/d/cherry_blossom_PNG20.png";
+petal.src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Cherry_blossom_petal.svg/512px-Cherry_blossom_petal.svg.png";
 
-    petal.style.position="fixed";
-    petal.style.top="-50px";
-    petal.style.left=Math.random()*100+"vw";
+petal.className="petal";
 
-    let size=Math.random()*25+15;
-    petal.style.width=size+"px";
+const size=Math.random()*25+15;
 
-    petal.style.zIndex="999";
+petal.style.width=size+"px";
 
-    let duration=Math.random()*6+6;
+petal.style.left=Math.random()*100+"vw";
 
-    petal.style.transition=
-        "transform "+duration+"s linear";
+const duration=Math.random()*6+8;
 
-    document.body.appendChild(petal);
+petal.style.animation=
+`fall ${duration}s linear forwards`;
 
-    setTimeout(()=>{
-        petal.style.transform=
-            `translate(${Math.random()*200-100}px,120vh)
-             rotate(${Math.random()*720}deg)`;
-    },50);
+document.body.appendChild(petal);
 
-    setTimeout(()=>{
-        petal.remove();
-    },duration*1000);
+setTimeout(()=>{
+petal.remove();
+},duration*1000);
+
 }
 
-setInterval(createPetal,300);
+setInterval(createPetal,250);
+
+/* MỞ THƯ */
+
+const envelope=document.getElementById("envelope");
+
+envelope.onclick=function(){
+
+envelope.classList.add("open");
+
+setTimeout(()=>{
+
+document.getElementById("scene").style.display="none";
+
+document.getElementById("letter").style.display="block";
+
+const lines=document.querySelectorAll(".line");
+
+lines.forEach((line,index)=>{
+
+setTimeout(()=>{
+
+line.classList.add("show");
+
+},index*1200);
+
+});
+
+},900);
+
+};
 
 </script>
 
