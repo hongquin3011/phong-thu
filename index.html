@@ -126,12 +126,6 @@ body{
     z-index:4;
 }
 
-.envelope.open .flap{
-    transform:rotateX(180deg);
-}
-
-/* THƯ */
-
 #letter{
     position:fixed;
     inset:0;
@@ -216,7 +210,7 @@ body{
 <div class="envelope-wrap">
 
 <div class="open-text">
-💗 Nhấn vào thư để mở 💗
+💗 Nhấn vào phong thư để "mở" 💗
 </div>
 
 <div class="envelope" id="envelope">
@@ -300,10 +294,6 @@ const envelope=document.getElementById("envelope");
 
 envelope.onclick=function(){
 
-envelope.classList.add("open");
-
-setTimeout(()=>{
-
 document.getElementById("scene").style.display="none";
 
 document.getElementById("letter").style.display="block";
@@ -319,8 +309,6 @@ line.classList.add("show");
 },index*1200);
 
 });
-
-},900);
 
 };
 
