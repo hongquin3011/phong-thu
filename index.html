@@ -1,64 +1,145 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Lá thư bí mật</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thư mời bí mật</title>
 
 <style>
 body{
+    margin:0;
+    overflow:hidden;
+    font-family: "Segoe UI", sans-serif;
+    background:linear-gradient(to bottom,#ffe6ee,#fff5f8);
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    background:#f5e6d3;
-    font-family:Arial;
 }
 
 #envelope{
-    width:250px;
-    height:160px;
-    background:#d88c8c;
-    cursor:pointer;
+    width:260px;
+    height:180px;
+    background:#ff9eb5;
+    border-radius:12px;
     display:flex;
     justify-content:center;
     align-items:center;
-    border-radius:10px;
-    font-size:50px;
+    cursor:pointer;
+    font-size:70px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    transition:0.3s;
+}
+
+#envelope:hover{
+    transform:scale(1.05);
 }
 
 #letter{
     display:none;
-    position:absolute;
     background:white;
-    padding:30px;
-    border-radius:10px;
-    width:400px;
-    box-shadow:0 0 20px rgba(0,0,0,.2);
+    width:700px;
+    max-width:90%;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    line-height:1.8;
+    position:relative;
+    z-index:10;
+}
+
+h2{
+    text-align:center;
+    color:#ff5b8a;
+}
+
+.capoo{
+    text-align:center;
+    margin-top:20px;
+}
+
+.capoo img{
+    width:180px;
+}
+
+.sakura{
+    position:fixed;
+    top:-20px;
+    font-size:22px;
+    animation:fall linear forwards;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
 }
 </style>
+
 </head>
 
 <body>
 
-<div id="envelope">✉️</div>
+<div id="envelope">💌</div>
 
 <div id="letter">
-<h2>Gửi bạn ❤️</h2>
+    <h2>💗 Thư Mời 💗</h2>
 
+```
 <p>
-Đây là nội dung lá thư của bạn.
+Dear anh Thắng cụa iem :3
 </p>
 
 <p>
-Chúc bạn luôn vui vẻ!
+Nay là ngày ny em tròn 29 tủi, em muốn tổ chức cho ảnh một buổi sinh nhật,
+có một chiếc bánh kem cùng một món quà nhỏ xinh.
 </p>
+
+<p>
+Hi vọng anh cùng người thương có thể sắp xếp thời gian đến chung vui với tụi iem.
+</p>
+
+<p>
+Thời gian và địa điểm để em bàn lại với ảnh rùi báo anh nhen :>
+</p>
+
+<p>
+See yaaaaaa 💕
+</p>
+
+<div class="capoo">
+    <img src="https://media.tenor.com/0fKX6M8i5s8AAAAi/capoo-love.gif">
+</div>
+```
+
 </div>
 
 <script>
+
 document.getElementById("envelope").onclick=function(){
     document.getElementById("envelope").style.display="none";
     document.getElementById("letter").style.display="block";
 }
+
+function createPetal(){
+    const petal=document.createElement("div");
+    petal.className="sakura";
+    petal.innerHTML="🌸";
+
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.animationDuration=(Math.random()*5+5)+"s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=>{
+        petal.remove();
+    },10000);
+}
+
+setInterval(createPetal,300);
+
 </script>
 
 </body>
