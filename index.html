@@ -211,19 +211,19 @@ body{
 
 <div id="scene">
 
-<div class="envelope-wrap">
+    <div class="envelope-wrap">
 
-<div class="open-text">
-💗 Nhấn vào phong thư để "mở" 💗
-</div>
+        <div class="open-text">
+        💗 Nhấn vào phong thư để mở 💗
+        </div>
 
-<div class="envelope" id="envelope">
+        <div class="envelope" id="envelope">
+            <div class="envelope-shape">
+                <div class="heart">💌</div>
+            </div>
+        </div>
 
-<div class="envelope-shape">
-    <div class="heart">💌</div>
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -290,25 +290,25 @@ function createPetal(){
 
 setInterval(createPetal,250);
 
-const envelope=document.getElementById("envelope");
+const envelope = document.getElementById("envelope");
 
-envelope.onclick=function(){
+envelope.onclick = function(){
 
-document.getElementById("scene").style.display="none";
+    document.getElementById("scene").style.display="none";
 
-document.getElementById("letter").style.display="block";
+    document.getElementById("letter").style.display="block";
 
-const lines=document.querySelectorAll(".line");
+    const lines=document.querySelectorAll(".line");
 
-lines.forEach((line,index)=>{
+    lines.forEach((line,index)=>{
 
-setTimeout(()=>{
+        setTimeout(()=>{
 
-line.classList.add("show");
+            line.classList.add("show");
 
-},index*1200);
+        }, index*1200);
 
-});
+    });
 
 };
 
