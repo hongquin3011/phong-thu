@@ -87,6 +87,7 @@ body{
     font-size:24px;
     font-weight:bold;
     margin:0;
+    white-space:nowrap;
 }
 
 .envelope{
@@ -183,6 +184,40 @@ body{
     width:220px;
 }
 
+
+#next-hint{
+    display:none;
+    text-align:center;
+    margin-top:40px;
+    font-size:18px;
+    color:#f7a6bd;
+    font-weight:normal;
+    line-height:1.6;
+    opacity:0;
+}
+
+
+.fade-hint{
+    display:block !important;
+    animation:fadeIn 2s forwards;
+}
+
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+
 @media(max-width:768px){
 
 .paper{
@@ -190,20 +225,24 @@ body{
     margin:20px auto;
 }
 
+
+.paper h1{
+    font-size:28px;
+    white-space:nowrap;
+    transform:scale(0.9);
+}
+
+
 .line{
     font-size:18px;
 }
 
-.paper h1{
-    font-size:32px;
-}
 
 .capoo img{
     width:160px;
 }
 
 }
-
 </style>
 </head>
 
@@ -251,6 +290,12 @@ Thời gian và địa điểm để em bàn lại với ảnh rùi báo anh nhe
 See yaaaaaa 💕
 </div>
 
+<div id="next-hint">
+Liệu anh có đọc được những dòng này không nhỉ🤔
+<br>
+Chạm vào màn hình lần nữa nhé 💗
+</div>
+
 <div class="capoo">
 
 <img src="https://media.tenor.com/0fKX6M8i5s8AAAAi/capoo-love.gif">
@@ -292,26 +337,172 @@ setInterval(createPetal,250);
 
 const envelope = document.getElementById("envelope");
 
+
 envelope.onclick = function(){
 
     document.getElementById("scene").style.display="none";
 
     document.getElementById("letter").style.display="block";
 
-    const lines=document.querySelectorAll(".line");
 
-    lines.forEach((line,index)=>{
-
-        setTimeout(()=>{
-
-            line.classList.add("show");
-
-        }, index*1200);
-
+    document.querySelectorAll(".petal").forEach(petal=>{
+        petal.style.zIndex="1";
     });
+
+
+    showFirstLetter();
 
 };
 
+
+
+
+
+function showFirstLetter(){
+
+
+const lines=document.querySelectorAll("#letter .line");
+
+
+lines.forEach((line,index)=>{
+
+
+setTimeout(()=>{
+
+    line.classList.add("show");
+
+}, index*1200);
+
+
+});
+
+
+
+// sau khi thư 1 hiện hết + chờ 10 giây
+
+setTimeout(()=>{
+
+
+document.getElementById("next-hint")
+.classList.add("fade-hint");
+
+
+}, lines.length*1200 + 10000);
+
+
+
+}
+
+
+
+
+let secondOpened=false;
+
+
+document.getElementById("letter").addEventListener("click",function(){
+
+
+
+const hint=document.getElementById("next-hint");
+
+
+
+if(
+hint.classList.contains("fade-hint")
+&& secondOpened===false
+){
+
+
+secondOpened=true;
+
+showSecondLetter();
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+function showSecondLetter(){
+
+
+document.querySelector(".paper").innerHTML=`
+
+
+<h1>💌 Một chiếc thư khác 💌</h1>
+
+
+
+<div class="line">
+Sinh nhật lần này của đằng ấy chưa được như em mong muốn.
+</div>
+
+
+
+<div class="line">
+Ngày hôm nay mở đầu bằng việc em không tìm đc tấm thiệp chuẩn bị từ trước😭
+</div>
+
+
+
+<div class="line">
+Haizzz, cất công chuẩn bị mà không đưa được cho anh :<
+em sẽ kiếm lại, tìm thấy rồi em đưa anh sau nhé.
+</div>
+
+
+
+<div class="line">
+Món quà em chuẩn bị cũng không thể tặng anh,
+một thời gian nữa em thấy phù hợp hơn sẽ tặng anh nhen😉
+</div>
+
+
+
+<div class="line">
+Chúc anh tuổi mới thật nhiều sức khỏe, hay ăn chóng lớn,
+mong anh có thể quên đi những chuyện khiến anh cảm thấy buồn,
+thấy khó chịu.
+</div>
+
+
+
+<div class="line">
+Và hi vọng em có thể đón sinh nhật với anh những năm sau nữa
+để gỡ gạc lại cho năm nay hehe 💕
+</div>
+
+
+`;
+
+
+
+const lines=document.querySelectorAll("#letter .line");
+
+
+
+lines.forEach((line,index)=>{
+
+
+setTimeout(()=>{
+
+line.classList.add("show");
+
+
+}, index*2000);
+
+
+});
+
+
+}
 </script>
 
 </body>
